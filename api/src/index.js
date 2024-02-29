@@ -24,8 +24,21 @@ app.get("/", (request, response) => {
   response.send({ message: "Hello from the server!" });
 });
 
+// Define a GET route for '/api/users'
 app.get('/api/users', (request, response) => {
-  response.send(mockUsers);
+  // Log the query parameters from the request
+  console.log(request.query);
+
+  // Destructure 'filter' and 'value' from the query parameters
+  const { query: { filter, value } } = request;
+  
+  // If 'filter' and 'value' are provided, return a filtered list of users
+  if (filter && value) return response.send(
+    mockUsers.filter((user) => user[filter].includes(value))
+  );
+
+  // If 'filter' and 'value' are not provided, return all users
+  return response.send(mockUsers);
 });
 
 // Define a GET route for '/api/users/:id'
