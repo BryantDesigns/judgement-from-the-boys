@@ -2,10 +2,10 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
-//const cors = require("cors");
+const cors = require("cors");
 
 
-//app.use(cors());
+app.use(cors());
 
 const mockUsers = [
   { id: 1, username: 'TBryant44', displayName: "Tyler Bryant" },
@@ -18,6 +18,19 @@ const mockUsers = [
   { id: 8, username: 'MMoore33', displayName: "Michelle Moore" },
   { id: 9, username: 'JTaylor21', displayName: "James Taylor" },
   { id: 10, username: 'LJackson32', displayName: "Linda Jackson" }
+];
+
+const mockProducts = [
+  { id: 1, name: 'Apple iPhone 13', price: 799, category: 'Electronics', description: '5.4-inch display, A15 Bionic chip, 5G capable' },
+  { id: 2, name: 'Samsung Galaxy S21', price: 699, category: 'Electronics', description: '6.2-inch display, Exynos 2100, 5G capable' },
+  { id: 3, name: 'Dell XPS 13', price: 999, category: 'Computers', description: '13.4-inch display, Intel i7, 16GB RAM, 512GB SSD' },
+  { id: 4, name: 'Sony WH-1000XM4', price: 348, category: 'Audio', description: 'Over-ear headphones, Noise cancelling, 30 hours battery life' },
+  { id: 5, name: 'Canon EOS M50 Mark II', price: 699, category: 'Cameras', description: '24.1MP, 4K video, Vlogging camera with flip screen' },
+  { id: 6, name: 'Nintendo Switch', price: 299, category: 'Gaming', description: 'Portable gaming console, 6.2-inch display, Joy-Con controllers' },
+  { id: 7, name: 'Instant Pot Duo', price: 89, category: 'Kitchen Appliances', description: '7-in-1 electric pressure cooker, 6 Quart' },
+  { id: 8, name: 'Fitbit Charge 4', price: 129, category: 'Fitness', description: 'Fitness and health tracker, Heart rate monitor, GPS' },
+  { id: 9, name: 'Kindle Paperwhite', price: 129, category: 'Reading', description: '6-inch display, Waterproof, 8GB storage' },
+  { id: 10, name: 'Bose SoundLink Revolve', price: 179, category: 'Audio', description: 'Portable Bluetooth speaker, 360 sound, 12 hours play time' }
 ];
 
 app.get("/", (request, response) => {
@@ -63,11 +76,7 @@ app.get('/api/users/:id', (request, response) => {
 });
 
 app.get('/api/products', (request, response) => {
-  response.send([
-    { id: 1, name: 'Product 1', price: 100 },
-    { id: 2, name: 'Product 2', price: 200 },
-    { id: 3, name: 'Product 3', price: 300 }
-  ]);
+  response.send(mockProducts);
 });
 
 app.listen(PORT, () => {
